@@ -1,7 +1,10 @@
 
 let http = require('http');
-const url = require('url');
-const { createCanvas, loadImage } = require('canvas');
+const path = require('path');
+const { createCanvas, loadImage, registerFont } = require('canvas');
+
+registerFont(path.join(__dirname, 'fonts', 'Arimo-Regular.ttf'), { family: 'Arimo' });
+registerFont(path.join(__dirname, 'fonts', 'Arimo-BoldItalic.ttf'), { family: 'Arimo-BoldItalic' });
 
 const server = http.createServer(async (req, res) => {
     const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
@@ -21,7 +24,7 @@ const server = http.createServer(async (req, res) => {
 
         const text = parsedUrl.searchParams.get('text') || 'Set custom text in the request URL query';
 
-        ctx.font = '36px sans-serif';
+        ctx.font = '36px Arimo-BoldItalic';
         ctx.fillStyle = 'white';
         ctx.textAlign = "center";
         ctx.textBaseline = "bottom";
